@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="lib/jquery.js"></script>
+        <script>
+            var ajx = function()
+            {
+                
+                $.ajax("/RESTTest/v1/one/person/"+$( "#id" ).val(), {
+                    type: "get",
+                    dataType: "json",
+                    success: function(data) {
+                            $("#name").val(data.name);
+                            $("#address").val(data.address);
+                            $("#city").val(data.city);
+                            $("#state").val(data.state);
+                            $("#zip").val(data.zip);
+           
+                    },
+                    error: function(xhr, status, err) {
+                        $('#results').html("Error " + status + ", " + err);
+                    }
+                    , cache: false});
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            <input type="button" value="Get Cust Data" onclick="ajx()" /> <br><br>
+            Id: <input type="text" id="id" /> <br>
+            Name: <input type="text" id="name" /> <br>
+            Address: <input type="text" id="address" /> <br>
+            City: <input type="text" id="city" /> <br>
+            State: <input type="text" id="state" /> <br>
+            Zip: <input type="text" id="zip" /> <br><br><br>
+            
+            <input type="reset" value="Clear" /> 
+
+        </form>
+    </body>
+</html>
